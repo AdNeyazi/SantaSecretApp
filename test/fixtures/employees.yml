@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: John Doe
+  email: john@example.com
+  slug: john-doe
+
+two:
+  name: Jane Smith
+  email: jane@example.com
+  slug: jane-smith

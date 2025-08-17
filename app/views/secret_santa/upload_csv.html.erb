@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload CSV - Secret Santa App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+    .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .btn { display: inline-block; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    .btn-primary { background-color: #007bff; color: white; }
+    .btn-secondary { background-color: #6c757d; color: white; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .form-group input[type="file"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+    .form-group .help-text { font-size: 0.9em; color: #666; margin-top: 5px; }
+    .sample-links { margin-top: 15px; }
+    .sample-links a { color: #007bff; text-decoration: none; }
+    .sample-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📤 Upload CSV Files</h1>
+      <p>Upload employee information and previous year assignments</p>
+    </div>
+
+    <div class="section">
+      <h2>👥 Upload Employee CSV</h2>
+      <p>Upload a CSV file containing employee information. The file should have the following columns:</p>
+      <ul>
+        <li><strong>Employee_Name</strong>: Full name of the employee</li>
+        <li><strong>Employee_EmailID</strong>: Email address of the employee</li>
+      </ul>
+      
+      <%= form_tag secret_santa_upload_csv_path, method: :post, multipart: true do %>
+        <div class="form-group">
+          <label for="employee_csv">Select Employee CSV File:</label>
+          <input type="file" id="employee_csv" name="employee_csv" accept=".csv" required>
+          <div class="help-text">File must be in CSV format with headers</div>
+        </div>
+        
+        <div class="sample-links">
+          <a href="<%= secret_santa_download_sample_employee_csv_path %>">📥 Download Sample Employee CSV</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Upload Employee CSV</button>
+      <% end %>
+    </div>
+
+    <div class="section">
+      <h2>📅 Upload Previous Year Assignments</h2>
+      <p>Upload a CSV file containing previous year's Secret Santa assignments to avoid duplicates. The file should have the following columns:</p>
+      <ul>
+        <li><strong>Employee_Name</strong>: Full name of the employee</li>
+        <li><strong>Employee_EmailID</strong>: Email address of the employee</li>
+        <li><strong>Secret_Child_Name</strong>: Full name of the secret child</li>
+        <li><strong>Secret_Child_EmailID</strong>: Email address of the secret child</li>
+      </ul>
+      
+      <%= form_tag secret_santa_upload_csv_path, method: :post, multipart: true do %>
+        <div class="form-group">
+          <label for="previous_assignments_csv">Select Previous Assignments CSV File:</label>
+          <input type="file" id="previous_assignments_csv" name="previous_assignments_csv" accept=".csv">
+          <div class="help-text">File must be in CSV format with headers (optional)</div>
+        </div>
+        
+        <div class="sample-links">
+          <a href="<%= secret_santa_download_sample_previous_assignments_csv_path %>">📥 Download Sample Previous Assignments CSV</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Upload Previous Assignments CSV</button>
+      <% end %>
+    </div>
+
+    <div class="section">
+      <h2>📋 CSV Format Requirements</h2>
+      <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+        <h4>Employee CSV Format:</h4>
+        <pre>Employee_Name,Employee_EmailID
+John Doe,john.doe@acme.com
+Jane Smith,jane.smith@acme.com
+Bob Johnson,bob.johnson@acme.com</pre>
+        
+        <h4>Previous Assignments CSV Format:</h4>
+        <pre>Employee_Name,Employee_EmailID,Secret_Child_Name,Secret_Child_EmailID
+John Doe,john.doe@acme.com,Jane Smith,jane.smith@acme.com
+Jane Smith,jane.smith@acme.com,Bob Johnson,bob.johnson@acme.com
+Bob Johnson,bob.johnson@acme.com,John Doe,john.doe@acme.com</pre>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <%= link_to "← Back to Dashboard", secret_santa_index_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</body>
+</html>
