@@ -25,7 +25,7 @@ A Rails application that automates the process of assigning Secret Santa gift ex
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/AdNeyazi/SantaSecretApp.git
    cd SantaSecretApp
    ```
 
